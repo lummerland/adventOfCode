@@ -23,17 +23,26 @@ const programm = (list) => {
     return result;
 }
 
-var result = programm([1, 0, 0, 0, 99]);
-result
-result = programm([2, 3, 0, 3, 99]);
-result
-result = programm([2, 4, 4, 5, 99, 0]);
-result
-result = programm([1, 1, 1, 4, 99, 5, 6, 0, 99]);
-result
+// run part 1
+//input[1] = 12;
+//input[2] = 2;
+//result = programm(input)
+//var final = result[0];
+// final
 
-// final run part 1
-input[1] = 12;
-input[2] = 2;
-result = programm(input)
-result
+// run part 2
+var nouns = verbs = Array(100).fill().map((x, i) => i);
+nouns.forEach((noun) => {
+    verbs.forEach((verb) => {
+        var copyOfInput = input.slice();
+        copyOfInput[1] = noun;
+        copyOfInput[2] = verb;
+        var result = programm(copyOfInput);
+        if (result[0] == 19690720) {
+            var final = 100 * noun + verb;
+            final
+        }
+    })
+})
+
+
