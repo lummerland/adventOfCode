@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "Setup to work on code puzzles using tdd and other techniques",
+  "scripts": {
+    "test": "mocha './**/*.spec.js'",
+    "test:watch": "mocha -w './**/*.spec.js'"
+  },
+  "keywords": [
+    "javascript",
+    "training"
+  ],
+  "author": "lummerland",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
