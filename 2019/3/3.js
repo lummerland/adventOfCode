@@ -5,15 +5,14 @@
 
 // PART II
 // 1. find the steps a wire goes for each intersection point (starting at origin)
+// 1.1. take the intersections and check the position in the list of steps for each wire
 // 2. find the lowest steps and add them together for both wires
 exports.nearestDistance = ((wire1, wire2) => {
-	const pathOfWire1 = this.calcComplete(wire1, [0,0]);
-	const pathOfWire2 = this.calcComplete(wire2, [0,0]);
+	const pathOfWire1 = this.calcAllSteps(wire1, [0,0]);
+	const pathOfWire2 = this.calcAllSteps(wire2, [0,0]);
 	console.debug("calc intersections of paths with length " + pathOfWire1.length + " and " + pathOfWire2.length);
 	const crossings = this.intersections(pathOfWire1, pathOfWire2);
-	console.debug("Found crossings: " + crossings);
 	const distances = crossings.map(point => this.distance([0,0], point)).sort((a,b) => a-b);
-	console.debug("Sorted distances: " + distances);
 	return distances[0];
 });
 
@@ -38,8 +37,8 @@ exports.calc = ((direction, start) => {
 	return result;
 });
 
-exports.calcComplete = ((ways, start) => {
-	var result = [];
+exports.calcAllSteps = ((ways, start) => {
+	var result = [start];
 	ways.forEach((way, index) => {
 		var startingpoint = (index == 0) ? start : result[result.length-1];
 		this.calc(way, startingpoint).map(coordinate => result.push(coordinate));
@@ -56,5 +55,23 @@ exports.goLeft = (start => [start[0], start[1]-1]);
 exports.goUp = (start => [start[0]+1, start[1]]);
 exports.goDown = (start => [start[0]-1, start[1]]);
 exports.steps = ((direction) => parseInt(direction.substring(1, direction.length), 10));
-exports.intersections = ((wire1, wire2) => wire1.filter((coordinate) => wire2.find(element => element[0] == coordinate[0] && element[1] == coordinate[1])));
+
+exports.stepsToIntersections = ((wire, intersections) => intersections.map((intersection) => {
+	return wire.findIndex((element) => element[0] == intersection[0] && element[1] == intersection[1])
+}));
+
+exports.xstepsToShortestIntersection = ((wire, intersections) => intersections.map((intersection) => {
+	return wire.findIndex((element) => element[0] == intersection[0] && element[1] == intersection[1])
+}).sort((a,b) => a-b)[0]);
+
+exports.intersections = ((wire1, wire2) => wire1.filter((coordinate) => wire2.find(element => 
+	element[0] == coordinate[0] && 
+	element[1] == coordinate[1] &&
+	element[0] != 0 && element[1] != 0 // ignore first entry since it is the start point
+	))
+);
 exports.distance = ((point1, point2) => Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]));
+
+exports.stepsToShortestIntersection = ((steps1, steps2) => steps1.map((element, index) => {
+	return element + steps2[index];
+}).sort((a,b) => a-b)[0]);
