@@ -105,19 +105,6 @@ describe("Calc distance", () => {
 	})
 })
 
-describe("Calc steps to intersections", () => {
-	it("calc steps for one point", () => {
-		const steps = [[0,0], [0,1], [0,2], [0,3], [1,3], [2,3], [3,3]];
-		const intersections = [[2,3]];
-		expect(functions.xstepsToShortestIntersection(steps, intersections)).to.equal(5);
-	});
-	it("calc steps for multiple points", () => {
-		const steps = [[0,0], [0,1], [0,2], [0,3], [1,3], [2,3], [3,3]];
-		const intersections = [[2,3], [0,3]];
-		expect(functions.xstepsToShortestIntersection(steps, intersections)).to.equal(3);
-	})
-})
-
 describe("Find nearest crossing point for two wires (Part 1) -> complete test", () => {
 	it("first example", () => {
 		const wire1 = ["R75","D30","R83","U83","L12","D49","R71","U7","L72"];

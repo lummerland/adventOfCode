@@ -60,10 +60,6 @@ exports.stepsToIntersections = ((wire, intersections) => intersections.map((inte
 	return wire.findIndex((element) => element[0] == intersection[0] && element[1] == intersection[1])
 }));
 
-exports.xstepsToShortestIntersection = ((wire, intersections) => intersections.map((intersection) => {
-	return wire.findIndex((element) => element[0] == intersection[0] && element[1] == intersection[1])
-}).sort((a,b) => a-b)[0]);
-
 exports.intersections = ((wire1, wire2) => wire1.filter((coordinate) => wire2.find(element => 
 	element[0] == coordinate[0] && 
 	element[1] == coordinate[1] &&
