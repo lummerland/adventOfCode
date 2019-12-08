@@ -42,15 +42,11 @@ describe("The equality rule Part 2", () => {
 	}) 
 })
 
-describe("Solution", () => {
-	var numberOfDifferentPasswords = 0;
-	for(var i = 284639; i<=748759; i++) {
-		if( 
-			functions.hasEqualAdjacentDigits(i) && 
-			functions.hasNoDecreasingDigits(i)
-		) {
-			numberOfDifferentPasswords++;
-		}
-	}
-	console.debug(numberOfDifferentPasswords);
+describe("Alternative solution", () => {
+	console.debug(
+		Array(748760-284639).fill().map((x, i) => i + 284639)
+		.filter(number => functions.hasEqualAdjacentDigits(number))
+		.filter(number => functions.hasNoDecreasingDigits(number))
+		.length
+	);
 })

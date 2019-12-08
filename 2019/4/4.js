@@ -16,7 +16,6 @@ exports.hasEqualAdjacentDigits = (number => {
 			digitCounter[digit] = 1;
 		}
 	});
-	console.debug(digitCounter)
 	Object.keys(digitCounter).forEach(digit => {
 		if (digitCounter[digit] == 2) {
 			found = true;
